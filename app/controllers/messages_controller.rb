@@ -1,10 +1,10 @@
 class MessagesController < ApplicationController
+	before_action :authenticate_user!, except: [:index, :show]
 	before_action :find_message, only: [:show, :edit, :update, :destroy]
+
 	def index
-		if user_signed_in?
-			@messages = Message.where(:user_id => current_user.id).order("created_at DESC") 
-		end	
-	end
+		@messages = Message.all.order("created_at DESC") 
+	end	
 
 	def new
 		@message = current_user.messages.build
