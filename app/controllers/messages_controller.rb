@@ -18,6 +18,22 @@ class MessagesController < ApplicationController
 		end		
 	end
 
+	def edit
+	end
+
+	def update
+		if @message.update(message_params)
+			redirect_to message_path
+		else
+			render 'edit'
+		end		
+	end
+
+	def destroy
+		@message.destroy
+		redirect_to root_path
+	end
+
 	def show
 	end
 
